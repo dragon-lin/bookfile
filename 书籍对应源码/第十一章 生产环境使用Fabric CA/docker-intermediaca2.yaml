@@ -1,0 +1,15 @@
+#
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+intermediaca2:
+   image: hyperledger/fabric-ca
+   container_name: intermediaca2
+   ports:
+     - "7056:7056"
+   environment:
+     - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+   volumes:
+     - "./intermediaca2:/etc/hyperledger/fabric-ca-server"
+   command: sh -c 'fabric-ca-server start -b admin2:adminpw2 -u http://admin:adminpw@localhost:7054 --cfg.affiliations.allowremove --cfg.identities.allowremove'
