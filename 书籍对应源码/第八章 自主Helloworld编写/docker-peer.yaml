@@ -6,6 +6,7 @@ services:
     container_name: peer0.org1.example.com
     image: hyperledger/fabric-peer
     environment:
+      - GOPATH=/opt/gopath
       - CORE_PEER_ID=peer0.org1.example.com
       - CORE_PEER_ADDRESS=peer0.org1.example.com:7051
       - CORE_PEER_CHAINCODEADDRESS=peer0.org1.example.com:7052
@@ -37,8 +38,6 @@ services:
       - 7051:7051
       - 7052:7052
       - 7053:7053
-    extra_hosts:
-      - "orderer.example.com:192.168.235.18"
 
   cli:
     container_name: cli
@@ -64,5 +63,3 @@ services:
         - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
     depends_on:
       - peer0.org1.example.com
-    extra_hosts:
-      - "orderer.example.com:192.168.235.18"
