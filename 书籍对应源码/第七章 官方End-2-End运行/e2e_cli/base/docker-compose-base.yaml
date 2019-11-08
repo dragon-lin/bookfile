@@ -9,6 +9,8 @@ services:
   zookeeper:
     image: hyperledger/fabric-zookeeper
     restart: always
+    environment:
+      - GODEBUG=netdns=go
     ports:
       - '2181'
       - '2888'
@@ -18,6 +20,7 @@ services:
     image: hyperledger/fabric-kafka
     restart: always
     environment:
+      - GODEBUG=netdns=go
       - KAFKA_MESSAGE_MAX_BYTES=103809024 # 99 * 1024 * 1024 B
       - KAFKA_REPLICA_FETCH_MAX_BYTES=103809024 # 99 * 1024 * 1024 B
       - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
@@ -28,6 +31,7 @@ services:
     container_name: orderer.example.com
     image: hyperledger/fabric-orderer
     environment:
+      - GODEBUG=netdns=go
       - ORDERER_GENERAL_LOGLEVEL=debug
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
       - ORDERER_GENERAL_GENESISMETHOD=file
